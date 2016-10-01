@@ -17,9 +17,10 @@ import java.util.ArrayList;
 
 import setmatch.setmatch.fragments.MatchFragment;
 import setmatch.setmatch.fragments.ProfileFragment;
+import setmatch.setmatch.fragments.StatsFragment;
 
 public class MainActivity extends AppCompatActivity implements MatchFragment.OnFragmentInteractionListener,
-                                                                ProfileFragment.OnFragmentInteractionListener{
+                                                                StatsFragment.OnFragmentInteractionListener{
 
 
     private FragmentPagerAdapter adapterViewPager;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements MatchFragment.OnF
             super(fragmentManager);
             fragmentList = new ArrayList<Fragment>();
             fragmentList.add(MatchFragment.newInstance("LSDKJFLSDKF", "L"));
-            fragmentList.add(ProfileFragment.newInstance("dddd", "q"));
+            fragmentList.add(StatsFragment.newInstance("dddd", "q"));
         }
 
         // Returns total number of pages
