@@ -333,6 +333,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
+                // TODO: Launch the main activity and add the credentials to the AccountManager
+
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
