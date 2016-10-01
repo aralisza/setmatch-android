@@ -22,21 +22,17 @@ public class NetworkManager{
 
 
 
-    //Sends login params to server and returns its result as JSON
+    //JSON send and response
     //UNTESTED
-    private JSONObject loginResponse(String... params) throws Exception{
-        URL url = new URL("http://gablescode.net:8000"); //If needed change url herep
+    private JSONObject serverResponse(JSONObject jsonObject, String urlString) throws Exception{
+
+        URL url = new URL(urlString);
         HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
         httpURLConnection.setDoOutput(true);
         httpURLConnection.setRequestMethod("POST");
         httpURLConnection.setRequestProperty("Content-Type", "application/json");
         httpURLConnection.connect();
 
-        JSONObject jsonObject = new JSONObject();
-
-        jsonObject.put("email", params[0]);
-        jsonObject.put("password", params[1]);
-        jsonObject.put("name", params[2]);
 
         DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());
         wr.writeBytes(jsonObject.toString());
