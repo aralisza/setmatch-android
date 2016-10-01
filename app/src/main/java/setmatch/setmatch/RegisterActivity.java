@@ -3,6 +3,7 @@ package setmatch.setmatch;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -19,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +30,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -192,7 +197,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserRegisterTask(email, password);
+            mAuthTask = new UserRegisterTask(name, email, password);
             mAuthTask.execute((Void) null);
         }
     }
@@ -292,42 +297,62 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserRegisterTask extends AsyncTask<Void, Void, JSONObject> {
 
         private final String mEmail;
         private final String mPassword;
+        private final String mName;
 
-        UserRegisterTask(String email, String password) {
+        UserRegisterTask(String name, String email, String password) {
+            mName = name;
             mEmail = email;
             mPassword = password;
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt registration
+        protected JSONObject doInBackground(Void... params) {
+            JSONObject msg = new JSONObject();
 
             try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
+                msg.put("name", mName);
+                msg.put("email", mEmail);
+                msg.put("password", mPassword);
+
+                return NetworkManager.serverResponse(msg, UrlBuilder.getRegisterEndpoint());
+            }catch(Exception e){
+                Log.i("LSKDJFLSKJF", e.toString());
+                return null;
             }
-
-
-            // TODO: register the new account here.
-            return true;
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
+        protected void onPostExecute(JSONObject result) {
             mAuthTask = null;
             showProgress(false);
 
-            if (success) {
-                finish();
+            if (result != null) {
+                try{
+                    CharSequence text;
+                    if(result.get("result").toString().equals("Success")){
+                        text = "Registration success";
+                    }else{
+                        text = "Registration failure";
+                    }
+                    Context context = getApplicationContext();
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    finish();
+                }catch (Exception e){
+                    Log.i("APPLICATION THING", "Registration Failure");
+                }
+
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                //TODO: properly identify this error
+                Log.i("SLDKJFLSDKJFLSKDJF", "NETWORKMANAGER NOT WORKING");
+                //mPasswordView.setError(getString(R.string.error_incorrect_password));
+                //mPasswordView.requestFocus();
             }
         }
 
