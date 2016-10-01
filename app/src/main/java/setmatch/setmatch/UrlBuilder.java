@@ -14,11 +14,10 @@ public class UrlBuilder {
     public static String getRegisterEndpoint(){
         return getBaseUrl() + registerEndpoint;
     }
-
     public static String getLoginEndpoint(){
         return getBaseUrl() + loginEndpoint;
     }
-    public static String getProfileEnd(){
+    public static String getProfileEndpoint(){
         return getBaseUrl() + profileEndpoint;
     }
 

@@ -374,8 +374,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             } else {
                 //TODO: properly identify this error
                 Log.i("SLDKJFLSDKJFLSKDJF", "NETWORKMANAGER NOT WORKING");
-                //mPasswordView.setError(getString(R.string.error_incorrect_password));
-                //mPasswordView.requestFocus();
+                Context context = getApplicationContext();
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, "Check Network Connection", duration);
+                toast.show();
             }
 
         }

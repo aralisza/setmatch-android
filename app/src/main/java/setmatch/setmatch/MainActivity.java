@@ -1,7 +1,11 @@
 package setmatch.setmatch;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,7 +13,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -69,6 +78,90 @@ public class MainActivity extends AppCompatActivity implements MyProfileFragment
         startActivity(intent);
     }
 
+    public class ProfileLoadTask extends AsyncTask<Void, Void, JSONObject> {
+
+
+        private Context mContext;
+
+        ProfileLoadTask(Context context) {
+            mContext = context;
+        }
+
+        @Override
+        protected JSONObject doInBackground(Void... params) {
+            JSONObject msg = new JSONObject();
+            SharedPreferences sharedPreferences =  getApplicationContext().getSharedPreferences(getString(R.string.shared_prefs_file_key), Context.MODE_PRIVATE);
+            try {
+                msg.put("email", sharedPreferences.getString(getString(R.string.saved_email_field), ""));
+                msg.put("token", sharedPreferences.getString(getString(R.string.saved_token_field), ""));
+                Log.i("LKSDJFLSKDJFLSKF", msg.toString());
+
+                return NetworkManager.serverResponsePost(msg, UrlBuilder.getProfileEndpoint());
+            }catch(Exception e){
+                Log.i("LSKDJFLSKJF", e.toString());
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject result) {
+
+            if (result != null) {
+                try{
+                    CharSequence text;
+                    if(result.get("result").toString().equals("Success")){
+                        text = "Profile Access success";
+                        updateProfile(result);
+                        Log.i("LSKDJFLSKJDFLS", result.toString());
+                        //((Activity)mContext).finish();
+
+
+
+                    }else{
+                        Log.i("LKSJDFLKSJDF", result.toString());
+                        text = "Profile Access failure";
+                    }
+                    Context context = getApplicationContext();
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+
+
+
+
+
+                }catch (Exception e){
+                    Log.i("APPLICATION THING", "Registration Failure");
+                }
+
+            } else {
+                //TODO: properly identify this error
+                Log.i("SLDKJFLSDKJFLSKDJF", "NETWORKMANAGER NOT WORKING");
+                Context context = getApplicationContext();
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, "Check Network Connection", duration);
+                toast.show();
+            }
+        }
+
+    }
+    private void updateProfile(JSONObject profile){
+        try {
+            ((TextView) findViewById(R.id.name)).setText(profile.getString("name"));
+            ((TextView) findViewById(R.id.num_matches)).setText(profile.getString("checkIns"));
+            ((TextView) findViewById(R.id.level)).setText(profile.getString("skill"));
+            ((TextView) findViewById(R.id.blurb_about)).setText(profile.getString("about"));
+        }catch(Exception e){
+            Context context = getApplicationContext();
+            int duration = Toast.LENGTH_SHORT;
+            Log.i("LSKDJFLSKJDFLS", e.toString());
+            Toast toast = Toast.makeText(context, "Died during profile update", duration);
+            toast.show();
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements MyProfileFragment
         adapterViewPager = new PagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
 
+        (new ProfileLoadTask(this)).execute();
 
 
     }
