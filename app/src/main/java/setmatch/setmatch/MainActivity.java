@@ -3,8 +3,6 @@ package setmatch.setmatch;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -15,12 +13,13 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-import setmatch.setmatch.fragments.MatchFragment;
+import setmatch.setmatch.fragments.MyProfileFragment;
 import setmatch.setmatch.fragments.ProfileFragment;
 import setmatch.setmatch.fragments.StatsFragment;
 
-public class MainActivity extends AppCompatActivity implements MatchFragment.OnFragmentInteractionListener,
-                                                                StatsFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements MyProfileFragment.OnFragmentInteractionListener,
+                                                                StatsFragment.OnFragmentInteractionListener,
+                                                                ProfileFragment.OnFragmentInteractionListener{
 
 
     private FragmentPagerAdapter adapterViewPager;
@@ -32,8 +31,9 @@ public class MainActivity extends AppCompatActivity implements MatchFragment.OnF
         public PagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
             fragmentList = new ArrayList<Fragment>();
-            fragmentList.add(MatchFragment.newInstance("LSDKJFLSDKF", "L"));
+            fragmentList.add(MyProfileFragment.newInstance("ksdjflk", "lskdfj"));
             fragmentList.add(StatsFragment.newInstance("dddd", "q"));
+            fragmentList.add(ProfileFragment.newInstance("dddd", "q"));
         }
 
         // Returns total number of pages

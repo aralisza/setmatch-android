@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -322,7 +323,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                 msg.put("email", mEmail);
                 msg.put("password", mPassword);
 
-                return NetworkManager.serverResponse(msg, UrlBuilder.getRegisterEndpoint());
+                return NetworkManager.serverResponsePost(msg, UrlBuilder.getRegisterEndpoint());
             }catch(Exception e){
                 Log.i("LSKDJFLSKJF", e.toString());
                 return null;
@@ -339,6 +340,19 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                     CharSequence text;
                     if(result.get("result").toString().equals("Success")){
                         text = "Registration success";
+                        SharedPreferences sharedPreferences =  getApplicationContext().getSharedPreferences(getString(R.string.shared_prefs_file_key), Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                        editor.putString(getString(R.string.saved_email_field), mEmail);
+                        editor.putString(getString(R.string.saved_token_field), result.get("token").toString());
+
+                        editor.commit();
+
+                        ((Activity)mContext).finish();
+
+                        Intent intent = new Intent(mContext, EditProfileActivity.class);
+                        startActivity(intent);
+
                     }else{
                         text = "Registration failure";
                     }
@@ -347,14 +361,11 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
-                    ((Activity)mContext).finish();
 
 
 
 
 
-                    Intent intent = new Intent(mContext, CreateProfileActivity.class);
-                    startActivity(intent);
                 }catch (Exception e){
                     Log.i("APPLICATION THING", "Registration Failure");
                 }
