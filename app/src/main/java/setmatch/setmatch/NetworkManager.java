@@ -53,7 +53,7 @@ public class NetworkManager{
                 sb.append(line + "\n");
             }
             is.close();
-            return new JSONObject(is.toString());
+            return new JSONObject(sb.toString());
         }
         catch(Exception e){
             e.printStackTrace();
