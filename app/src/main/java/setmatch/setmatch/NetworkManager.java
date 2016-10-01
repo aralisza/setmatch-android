@@ -24,7 +24,7 @@ public class NetworkManager{
 
     //JSON send and response
     //UNTESTED
-    private JSONObject serverResponse(JSONObject jsonObject, String urlString) throws Exception{
+    public static JSONObject serverResponse(JSONObject jsonObject, String urlString) throws Exception{
 
         URL url = new URL(urlString);
         HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
