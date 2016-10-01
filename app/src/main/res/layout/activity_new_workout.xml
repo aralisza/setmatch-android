@@ -21,6 +21,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
+
     <include layout="@layout/content_new_workout" />
 
     <android.support.design.widget.FloatingActionButton
