@@ -3,7 +3,9 @@ package setmatch.setmatch;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -197,7 +199,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserRegisterTask(name, email, password);
+            mAuthTask = new UserRegisterTask(this, name, email, password);
             mAuthTask.execute((Void) null);
         }
     }
@@ -302,11 +304,13 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         private final String mEmail;
         private final String mPassword;
         private final String mName;
+        private Context mContext;
 
-        UserRegisterTask(String name, String email, String password) {
+        UserRegisterTask(Context context, String name, String email, String password) {
             mName = name;
             mEmail = email;
             mPassword = password;
+            mContext = context;
         }
 
         @Override
@@ -343,7 +347,14 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
-                    finish();
+                    ((Activity)mContext).finish();
+
+
+
+
+
+                    Intent intent = new Intent(mContext, CreateProfileActivity.class);
+                    startActivity(intent);
                 }catch (Exception e){
                     Log.i("APPLICATION THING", "Registration Failure");
                 }
