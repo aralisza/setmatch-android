@@ -2,30 +2,51 @@ package setmatch.setmatch;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.DataOutputStream;
+
 import java.net.URL;
+import java.net.HttpURLConnection;
 
 import java.lang.String;
 import java.lang.StringBuffer;
 
-public class NetworkManager {
+
+import org.json.JSONObject;
 
 
-    private static String readUrl(String urlString) throws Exception{
-        BufferedReader reader = null;
-        try{
+/*
+* Network manager was created to send and recieve JSON data.
+* Be nice to it
+ */
+public class NetworkManager{
 
-            URL url = new URL(urlString);
-            reader = new BufferedReader(new InputStreamReader(url.openStream()));
-            StringBuffer buffer = new StringBuffer();
-            int read;
-            char[] chars = new char[1024];
-            while ((read = reader.read(chars)) != -1)
-                buffer.append(chars, 0, read);
 
-            return buffer.toString();
-        } finally {
-            if (reader != null)
-                reader.close();
-        }
+
+    //Sends login params to server and returns its result as JSON
+    //UNTESTED
+    private JSONObject loginResponse(String... params) throws Exception{
+        URL url = new URL("http://gablescode.net:8000"); //If needed change url herep
+        HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+        httpURLConnection.setDoOutput(true);
+        httpURLConnection.setRequestMethod("POST");
+        httpURLConnection.setRequestProperty("Content-Type", "application/json");
+        httpURLConnection.connect();
+
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("email", params[0]);
+        jsonObject.put("password", params[1]);
+        jsonObject.put("name", params[2]);
+
+        DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());
+        wr.writeBytes(jsonObject.toString());
+        wr.flush();
+        wr.close();
+
+        return new JSONObject(wr.toString());
+
     }
+
+
 }
+
