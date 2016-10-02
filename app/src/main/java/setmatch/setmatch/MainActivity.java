@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements MyProfileFragment
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+//                    toast.show();
 
 
                 } catch (Exception e) {
@@ -186,8 +186,7 @@ public class MainActivity extends AppCompatActivity implements MyProfileFragment
             try {
                 msg.put("email", sharedPreferences.getString(getString(R.string.saved_email_field), ""));
                 msg.put("token", sharedPreferences.getString(getString(R.string.saved_token_field), ""));
-                msg.put("id", curmatch.get("_id"));
-
+                msg.put("id", (curmatch.get("email2")));
 
 
                 return NetworkManager.serverResponsePost(msg, UrlBuilder.getCheckEndpoint());
@@ -219,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements MyProfileFragment
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+//                    toast.show();
 
 
                 } catch (Exception e) {
@@ -235,6 +234,7 @@ public class MainActivity extends AppCompatActivity implements MyProfileFragment
                 Toast toast = Toast.makeText(context, "Check Network Connection", duration);
                 toast.show();
             }
+            printInfo();
         }
 
     }
@@ -250,12 +250,13 @@ public class MainActivity extends AppCompatActivity implements MyProfileFragment
             ((TextView) findViewById(R.id.num_matches)).setText(profile.getString("checkIns"));
             ((TextView) findViewById(R.id.level)).setText(profile.getString("skill"));
             ((TextView) findViewById(R.id.blurb_about)).setText(profile.getString("about"));
+            ((TextView) findViewById(R.id.target_exercise)).setText(getPrefs(profile.getJSONArray("prefs")));
         } catch (Exception e) {
             Context context = getApplicationContext();
             int duration = Toast.LENGTH_SHORT;
             Log.i("LSKDJFLSKJDFLS", e.toString());
             Toast toast = Toast.makeText(context, "Died during profile update", duration);
-            toast.show();
+//            toast.show();
         }
 
     }
@@ -291,9 +292,9 @@ public class MainActivity extends AppCompatActivity implements MyProfileFragment
     }
 
     public void matchClick(View v) {
-
-        this.printInfo();
         (new CheckTask(this)).execute();
+
+
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.shared_prefs_file_key), Context.MODE_PRIVATE);
         JSONObject json = new JSONObject();
@@ -321,28 +322,52 @@ public class MainActivity extends AppCompatActivity implements MyProfileFragment
         }*/
     }
 
-    private void printInfo() {
+    boolean firstRun = true;
+
+    private String getPrefs(JSONArray arr) {
+        String prefss[] = new String[] {"Swimming", "Lifting", "Yoga", "Running"};
+        String result = "";
+        for (String s : prefss) {
+            for (int i = 0; i < arr.length(); i++) {
+                try {
+                    if (arr.getString(i).equals(s)) {
+
+                        result += s + ", ";
+                        break;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result.substring(0, result.length() - 2);
+    }
+
+    public void printInfo() {
+
         if (this.matches.size() > 0) {
+            this.curmatch = this.matches.remove(0);
             JSONObject result = this.curmatch;
             try {
                 ((TextView) findViewById(R.id.name_match)).setText(result.getString("name"));
 
-                int tup = result.getInt("up");
-                int tdown = result.getInt("down");
-
-                ((TextView) findViewById(R.id.down_rating)).setText(String.valueOf((double) tdown / (tup + tdown)));
-                ((TextView) findViewById(R.id.up_rating)).setText(String.valueOf((double) tup / (tup + tdown)));
+//                int tup = result.getInt("up");
+//                int tdown = result.getInt("down");
+//
+//                ((TextView) findViewById(R.id.down_rating)).setText(String.valueOf((double) tdown / (tup + tdown)));
+//                ((TextView) findViewById(R.id.up_rating)).setText(String.valueOf((double) tup / (tup + tdown)));
 
 
                 ((TextView) findViewById(R.id.match_num_matches)).setText(result.getString("checkIns"));
-                ((TextView) findViewById(R.id.match_level)).setText(result.getString("skill"));
+                ((TextView) findViewById(R.id.match_level)).setText(result.getInt("skill"));
                 ((TextView) findViewById(R.id.match_blurb_about)).setText(result.getString("about"));
+                ((TextView) findViewById(R.id.target_exercise)).setText(getPrefs(result.getJSONArray("workoutPrefs")));
             } catch (Exception e) {
                 Context context = getApplicationContext();
                 int duration = Toast.LENGTH_SHORT;
                 Log.i("LSKDJFLSKJDFLS", e.toString());
-                Toast toast = Toast.makeText(context, "Died during profile update", duration);
-                toast.show();
+//                Toast toast = Toast.makeText(context, "Died during profile update", duration);
+//                toast.show();
             }
         } else {
             try {
@@ -351,7 +376,6 @@ public class MainActivity extends AppCompatActivity implements MyProfileFragment
             }
         }
 
-        this.curmatch = this.matches.remove(0);
     }
 
     void updateMatches(JSONArray result) throws JSONException {
@@ -359,6 +383,7 @@ public class MainActivity extends AppCompatActivity implements MyProfileFragment
         for (int i = 0; i < result.length(); i++) {
             this.matches.add((JSONObject) result.get(i));
         }
+        this.printInfo();
     }
 
 
