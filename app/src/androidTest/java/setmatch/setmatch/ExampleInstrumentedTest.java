@@ -6,8 +6,11 @@ import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runner.notification.RunListener;
 
 import static org.junit.Assert.*;
+
+import setmatch.setmatch.GpsPosition;
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -23,4 +26,12 @@ public class ExampleInstrumentedTest {
 
         assertEquals("setmatch.setmatch", appContext.getPackageName());
     }
+
+//    @Test
+//    public void getLocation() {
+//        GpsPosition pos = new GpsPosition();
+//
+//        assertNotEquals(pos.getLocation(), null);
+//        System.out.println(pos.getLocation());
+//    }
 }

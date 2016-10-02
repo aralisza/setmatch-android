@@ -74,6 +74,25 @@ public class MainActivity extends AppCompatActivity implements MyProfileFragment
     }
 
     protected void launchNewWorkout(View v){
+
+        // create class object
+                GpsPosition gps = new GpsPosition(this.getApplicationContext());
+
+        // check if GPS enabled
+        if(gps.canGetLocation()){
+
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+
+            // \n is for new line
+            Log.i(String.valueOf(latitude), String.valueOf(longitude));
+        }else{
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            gps.showSettingsAlert();
+        }
+
         Intent intent = new Intent(this, NewWorkoutActivity.class);
         startActivity(intent);
     }
