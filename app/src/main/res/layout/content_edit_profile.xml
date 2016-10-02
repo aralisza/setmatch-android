@@ -5,6 +5,7 @@
     android:id="@+id/content_edit_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -12,145 +13,225 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="setmatch.setmatch.EditProfileActivity"
     tools:showIn="@layout/activity_edit_profile">
-    <RelativeLayout
+
+    <LinearLayout
+        android:id="@+id/name_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name: "
-            android:textStyle="bold"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/name_input"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name here"
-            android:textSize="20sp"
-            android:layout_toRightOf="@id/name"/>
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/about_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name_container">
+
         <TextView
             android:id="@+id/about"
-            android:layout_below="@id/name_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="About"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:text="About: "
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/about_input"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="About me"
-            android:textSize="20sp"
-            android:layout_below="@id/name_input"
-            android:layout_toRightOf="@id/about"/>
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/phone_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/about_container">
+
         <TextView
             android:id="@+id/phone"
-            android:layout_below="@id/about_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Phone Number: "
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/phone_input"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Phone Number"
-            android:textSize="20sp"
-            android:layout_below="@id/about_input"
-            android:layout_toRightOf="@id/phone"/>
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/email_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phone_container">
+
         <TextView
             android:id="@+id/email"
-            android:layout_below="@id/phone_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email: "
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/email_input"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="email"
-            android:textSize="20sp"
-            android:layout_below="@id/phone_input"
-            android:layout_toRightOf="@id/email"/>
+            android:text="Email"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/exercise_prefs_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/email_container"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/exercise_prefs"
-            android:layout_below="@id/email_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Workout Preferences: "
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <CheckBox
-            android:id="@+id/swimming_checkbox"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/exercise_prefs"/>
-        <CheckBox
-            android:id="@+id/running_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/swimming_checkbox"
-            android:layout_below="@id/exercise_prefs"/>
-        <CheckBox
-            android:id="@+id/yoga_checkbox"
-            android:layout_toRightOf="@id/running_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/exercise_prefs"/>
-        <CheckBox
-            android:id="@+id/lifting_checkbox"
-            android:layout_toRightOf="@id/yoga_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/exercise_prefs"/>
+            android:layout_below="@id/exercise_prefs"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:id="@+id/swimming_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/swimming_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Swimming"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/running_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/swimming_container">
+
+                <CheckBox
+                    android:id="@+id/running_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Running"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/yoga_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/running_container">
+
+                <CheckBox
+                    android:id="@+id/yoga_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Yoga"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/yoga_container">
+
+                <CheckBox
+                    android:id="@+id/lifting_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lifting"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/skill_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/exercise_prefs_container">
+
         <TextView
             android:id="@+id/skill"
-            android:layout_below="@id/lifting_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Skill: "
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
         <Spinner
             android:id="@+id/skill_spinner"
-            android:layout_below="@id/skill"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Spinner>
+    </LinearLayout>
 
-        </Spinner>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/skill_container">
 
         <Button
             android:id="@+id/save_button"
-            android:text="Save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/skill_spinner"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:onClick="saveButtonClick"/>
+            android:onClick="saveButtonClick"
+            android:text="Save" />
 
         <Button
             android:id="@+id/button2"
-            android:text="Cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/save_button"
-            android:layout_alignBottom="@+id/save_button"
-            android:layout_toRightOf="@+id/yoga_checkbox"
-            android:layout_toEndOf="@+id/yoga_checkbox"
-            android:onClick="cancelButtonClick"/>
-
-
-    </RelativeLayout>
-
+            android:onClick="cancelButtonClick"
+            android:text="Cancel" />
+    </LinearLayout>
 </RelativeLayout>
