@@ -9,7 +9,6 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
-    <!-- TODO: Update blank fragment layout -->
     <ScrollView
         android:id="@+id/profile"
         android:layout_width="match_parent"
@@ -25,37 +24,41 @@
                 android:id="@+id/profile_image_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_centerInParent="true">
+                android:layout_centerHorizontal="true"
+                android:gravity="center">
 
                 <ImageButton
+                    android:id="@+id/unmatch"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
+                    android:layout_margin="10dp"
                     android:background="@null"
+                    android:contentDescription="@string/profile_reject"
                     android:orientation="vertical"
                     android:scaleType="fitCenter"
-                    android:src="@mipmap/x"
-                    android:layout_margin="10dp"/>
+                    android:src="@mipmap/x" />
 
                 <ImageView
                     android:id="@+id/profile_image"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:layout_centerHorizontal="true"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@string/profile_image"
                     android:scaleType="fitCenter"
-                    android:src="@mipmap/ic_launcher"
-                    android:layout_margin="10dp"/>
+                    android:src="@mipmap/ic_launcher" />
 
                 <ImageButton
+                    android:id="@+id/match"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
+                    android:layout_margin="10dp"
                     android:background="@null"
+                    android:contentDescription="@string/profile_approve"
                     android:orientation="vertical"
                     android:scaleType="fitCenter"
-                    android:src="@mipmap/c"
-                    android:layout_margin="10dp" />
+                    android:src="@mipmap/c" />
 
             </LinearLayout>
 
@@ -67,8 +70,150 @@
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:text="Testing Name"
-                android:textSize="30dp" />
+                android:textStyle="bold"
+                android:textSize="30sp" />
 
+            <LinearLayout
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name"
+                android:layout_centerHorizontal="true">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_margin="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/d" />
+
+                <TextView
+                    android:id="@+id/down_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="10%"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_margin="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/u" />
+
+                <TextView
+                    android:id="@+id/up_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="90%"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/match_stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rating"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="# Matches:"
+                    android:textStyle="bold"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/num_matches"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/level_exercise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/match_stat"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Level: "
+                    android:textStyle="bold"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Beginner"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/target_exercise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/level_exercise"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="Swimming (endurance), swimming (speed), running (marathon), yoga."
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/target_exercise"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:id="@+id/distance_from_me">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Distance from me: "
+                    android:textStyle="bold"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2mi"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/about_me"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/distance_from_me"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="About me: "
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/blurb_about"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Blurb about me!"
+                    android:textSize="20sp"/>
+            </LinearLayout>
 
         </RelativeLayout>
     </ScrollView>
