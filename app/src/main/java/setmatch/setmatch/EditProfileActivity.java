@@ -38,6 +38,7 @@ public class EditProfileActivity extends AppCompatActivity {
             try {
                 msg.put("email", sharedPreferences.getString(getString(R.string.saved_email_field), ""));
                 msg.put("token", sharedPreferences.getString(getString(R.string.saved_token_field), ""));
+
                 Log.i("LKSDJFLSKDJFLSKF", msg.toString());
 
                 return NetworkManager.serverResponsePost(msg, UrlBuilder.getProfileEndpoint());

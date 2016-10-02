@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+
 import setmatch.setmatch.fragments.MyProfileFragment;
 import setmatch.setmatch.fragments.ProfileFragment;
 import setmatch.setmatch.fragments.StatsFragment;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements MyProfileFragment
             fragmentList.add(MyProfileFragment.newInstance("ksdjflk", "lskdfj"));
             fragmentList.add(StatsFragment.newInstance("dddd", "q"));
             fragmentList.add(ProfileFragment.newInstance("dddd", "q"));
+
         }
 
         // Returns total number of pages
