@@ -40,5 +40,5 @@
     <string name="title_activity_edit_profile">Edit Profile</string>
     <string name="shared_prefs_file_key">062096436082278372284161225136719784122495725135554113226398</string>
     <string name="saved_email_field">SAVED_EMAIL_SETTING</string>
-    <string name="saved_token_field">SAVED_EMAIL_SETTING</string>
+    <string name="saved_token_field">SAVED_TOKEN_SETTING</string>
 </resources>
