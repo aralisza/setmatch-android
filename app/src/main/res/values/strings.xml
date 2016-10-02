@@ -41,4 +41,11 @@
     <string name="shared_prefs_file_key">062096436082278372284161225136719784122495725135554113226398</string>
     <string name="saved_email_field">SAVED_EMAIL_SETTING</string>
     <string name="saved_token_field">SAVED_TOKEN_SETTING</string>
+
+    <string-array name="skill_level">
+        <item>Beginner</item>
+        <item>Intermediate</item>
+        <item>Advanced</item>
+        <item>Professional</item>
+    </string-array>
 </resources>

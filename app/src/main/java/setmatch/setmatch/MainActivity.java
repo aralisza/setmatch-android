@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements MyProfileFragment
     protected void launchNewWorkout(View v){
 
         // create class object
-                GpsPosition gps = new GpsPosition(this.getApplicationContext());
+        GpsPosition gps = new GpsPosition(this.getApplicationContext());
 
         // check if GPS enabled
         if(gps.canGetLocation()){
@@ -166,6 +166,12 @@ public class MainActivity extends AppCompatActivity implements MyProfileFragment
         }
 
     }
+
+    public void launchEditProfileActivity(View v){
+        Intent intent = new Intent(this, EditProfileActivity.class);
+        startActivity(intent);
+    }
+
     private void updateProfile(JSONObject profile){
         try {
             ((TextView) findViewById(R.id.name)).setText(profile.getString("name"));

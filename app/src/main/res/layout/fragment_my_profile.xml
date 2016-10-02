@@ -163,7 +163,8 @@
                 android:text="@string/edit_profile"
                 android:textAllCaps="false"
                 android:background="@color/colorPrimary"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:onClick="launchEditProfileActivity"/>
 
             <Button
                 android:id="@+id/update_location"

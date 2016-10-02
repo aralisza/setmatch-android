@@ -6,6 +6,7 @@ public class UrlBuilder {
     public final static String registerEndpoint = "user";
     public final static String loginEndpoint = "login";
     public final static String profileEndpoint = "profile";
+    public final static String editProfileEndpoint = "profile/edit";
 
     public static String getBaseUrl(){
         return baseUrl;
@@ -20,5 +21,7 @@ public class UrlBuilder {
     public static String getProfileEndpoint(){
         return getBaseUrl() + profileEndpoint;
     }
-
+    public static String getEditProfileEndpoint(){
+        return getBaseUrl() + editProfileEndpoint;
+    }
 }
