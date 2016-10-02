@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 24
     buildToolsVersion "24.0.2"
     defaultConfig {
         applicationId "setmatch.setmatch"
@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -18,6 +19,7 @@ android {
         }
     }
 }
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -31,4 +33,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:9.2.0'
     compile 'com.google.android.gms:play-services-location:9.2.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:multidex:1.0.1'
 }
