@@ -29,6 +29,8 @@
     <string name="profile_up_rating">Profile up rating.</string>
     <string name="profile_num_check_ins">#Check-ins: </string>
     <string name="edit_profile">Edit profile</string>
+    <string name="update_location">Update location</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
