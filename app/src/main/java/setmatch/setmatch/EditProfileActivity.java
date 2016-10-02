@@ -161,10 +161,10 @@ public class EditProfileActivity extends AppCompatActivity {
             else
                 ((Spinner) findViewById(R.id.skill_spinner)).setSelection(0);
             for(int i = 0; i < profile.getJSONArray("prefs").length(); i++){
-                if(profile.getJSONArray("prefs").get(i) == "Swimming") ((CheckBox) findViewById(R.id.swimming_checkbox)).setChecked(true);
-                if(profile.getJSONArray("prefs").get(i) == "Running") ((CheckBox) findViewById(R.id.running_checkbox)).setChecked(true);
-                if(profile.getJSONArray("prefs").get(i) == "Yoga") ((CheckBox) findViewById(R.id.yoga_checkbox)).setChecked(true);
-                if(profile.getJSONArray("prefs").get(i) == "Lifting") ((CheckBox) findViewById(R.id.lifting_checkbox)).setChecked(true);
+                if(profile.getJSONArray("prefs").get(i).equals( "Swimming")) ((CheckBox) findViewById(R.id.swimming_checkbox)).setChecked(true);
+                if(profile.getJSONArray("prefs").get(i).equals( "Running")) ((CheckBox) findViewById(R.id.running_checkbox)).setChecked(true);
+                if(profile.getJSONArray("prefs").get(i).equals( "Yoga") )((CheckBox) findViewById(R.id.yoga_checkbox)).setChecked(true);
+                if(profile.getJSONArray("prefs").get(i).equals(  "Lifting")) ((CheckBox) findViewById(R.id.lifting_checkbox)).setChecked(true);
 
             }
         }catch(Exception e){
