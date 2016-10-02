@@ -1,5 +1,6 @@
 package setmatch.setmatch;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -102,7 +103,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 mMsg.put("token", sharedPreferences.getString(getString(R.string.saved_token_field), ""));
                 Log.i("LKSDJFLSKDJFLSKF", mMsg.toString());
 
-                return NetworkManager.serverResponsePost(mMsg, UrlBuilder.getProfileEndpoint());
+                return NetworkManager.serverResponsePost(mMsg, UrlBuilder.getEditProfileEndpoint());
             }catch(Exception e){
                 Log.i("LSKDJFLSKJF", e.toString());
                 return null;
@@ -119,7 +120,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         text = "Profile Edit success";
                         updateProfileFields(result);
                         Log.i("LSKDJFLSKJDFLS", result.toString());
-                        //((Activity)mContext).finish();
+                        ((Activity)mContext).finish();
 
 
                     }else{
