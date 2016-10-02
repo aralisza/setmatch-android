@@ -12,6 +12,7 @@ import java.lang.String;
 import java.lang.StringBuffer;
 
 import android.util.Log;
+import android.webkit.WebView;
 
 import org.json.JSONObject;
 
@@ -24,9 +25,8 @@ public class NetworkManager{
 
 
 
-    //JSON send and response
-    //UNTESTED
-    public static JSONObject serverResponse(JSONObject jsonObject, String urlString){
+    //JSON Post and response
+    public static JSONObject serverResponsePost(JSONObject jsonObject, String urlString){
 
         try {
 
@@ -42,6 +42,40 @@ public class NetworkManager{
             wr.writeBytes(jsonObject.toString());
             wr.flush();
             wr.close();
+
+            int responseCode = httpURLConnection.getResponseCode();
+            InputStream is = httpURLConnection.getInputStream();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"), 8);
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null){
+                sb.append(line + "\n");
+            }
+            is.close();
+            JSONObject result = new JSONObject(sb.toString());
+            return result;
+            //return new JSONObject(is.toString());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
+    //Just like above function, but uses get instead of post
+    public JSONObject serverResponseGet(JSONObject jsonObject, String urlString){
+        try {
+
+            URL url = new URL(urlString);
+
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.setRequestProperty("User-Agent", System.getProperty("http.agent"));
+            httpURLConnection.connect();
 
             int responseCode = httpURLConnection.getResponseCode();
             InputStream is = httpURLConnection.getInputStream();
