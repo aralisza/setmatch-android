@@ -27,18 +27,6 @@
                 android:layout_centerHorizontal="true"
                 android:gravity="center">
 
-                <ImageButton
-                    android:id="@+id/unmatch"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:background="@null"
-                    android:contentDescription="@string/profile_reject"
-                    android:orientation="vertical"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/x" />
-
                 <ImageView
                     android:id="@+id/profile_image"
                     android:layout_width="150dp"
@@ -47,18 +35,6 @@
                     android:contentDescription="@string/profile_image"
                     android:scaleType="fitCenter"
                     android:src="@mipmap/ic_launcher" />
-
-                <ImageButton
-                    android:id="@+id/match"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:background="@null"
-                    android:contentDescription="@string/profile_approve"
-                    android:orientation="vertical"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/c" />
 
             </LinearLayout>
 
@@ -74,50 +50,10 @@
                 android:textSize="30sp" />
 
             <LinearLayout
-                android:id="@+id/rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/name"
-                android:layout_centerHorizontal="true">
-
-                <ImageView
-                    android:contentDescription="@string/profile_down_rating"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="10dp"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/d" />
-
-                <TextView
-                    android:id="@+id/down_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="10%"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:contentDescription="@string/profile_up_rating"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="10dp"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/u" />
-
-                <TextView
-                    android:id="@+id/up_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="90%"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/match_stat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rating"
+                android:layout_below="@id/name"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="5dp"
                 android:gravity="center">
@@ -125,7 +61,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/profile_num_check_ins"
+                    android:text="# Matches:"
                     android:textStyle="bold"
                     android:textSize="20sp" />
 
@@ -216,6 +152,17 @@
                     android:text="Blurb about me!"
                     android:textSize="20sp"/>
             </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/about_me"
+                android:layout_margin="25dp"
+                android:textSize="30sp"
+                android:text="@string/edit_profile"
+                android:textAllCaps="false"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"/>
 
         </RelativeLayout>
     </ScrollView>
